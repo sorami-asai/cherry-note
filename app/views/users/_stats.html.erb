@@ -1,0 +1,5 @@
+<% @users ||= current_user %>
+<div class="stats">
+  <%= link_to "フォロー#{@users.following.count}", following_user_path(@users) %>
+  <%= link_to "フォロワー#{@users.followers.count}", followers_user_path(@users) %>
+</div>

@@ -1,0 +1,23 @@
+<div class="card text-center w-75 mt-5 mb-5 mx-auto">
+  <div class="card-header">
+    <p style="font-weight: bold;"><%= link_to "#{@users.nickname}さんのマイページ", user_path(@users) %></p>
+  </div>
+  <div class="card-body">
+    <% if @users.image.nil? %>
+      <%= link_to edit_user_path(@users) do %>
+        <%= image_tag "assets/071-01.png", size: "100x100", class: "user-image-circle mb-2" %>
+      <% end %>
+    <% else %>
+      <%= link_to edit_user_path(@users) do %>
+        <%= image_tag @users.image, size: "100x100", class: "user-image-circle mb-2" %>
+      <% end %>
+    <% end %>
+    <%= render 'stats' %>
+    <%= render 'follow_form' %>
+  </div>
+  <div class="card-footer text-muted">
+    <% if user_signed_in? && @users.id == current_user.id %>
+      <%= link_to 'マイページの編集', edit_user_path(@users) %>
+    <% end %>
+  </div>
+</div>

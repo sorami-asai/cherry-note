@@ -1,0 +1,46 @@
+<div class="card text-center w-75 m-5 mx-auto">
+  <div class="card-header">
+    <div class="float-left">
+      <% if @tweets.user.image.nil? %>
+        <%= link_to user_path(@tweets.user.id) do %>
+          <%= image_tag "assets/071-01.png", size: "45x45", class: "user-image-circle" %>
+        <% end %>
+      <% else %>
+        <%= link_to user_path(@tweets.user.id) do %>
+          <%= image_tag @tweets.user.image, size: "45x45", class: "user-image-circle" %>
+        <% end %>
+      <% end %>
+      <%= link_to "#{@tweets.user.nickname}さんの投稿", user_path(@tweets.user.id) %>
+    </div>
+    <div class="float-right">
+      <div class="dropdown">
+        <a class="oi oi-ellipses dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <% if user_signed_in? && @tweets.user.id == current_user.id %>
+            <ul>
+              <li><%= link_to '編集', edit_tweet_path(@tweets) %></li>
+              <li><%= link_to '削除', tweet_path(@tweets), method: :delete %></li>
+            </ul>
+          <% else %>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><%= link_to "#{@tweets.user.nickname}さんのマイページ", user_path(@tweets.user.id) %></li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title" style="font-weight: bold;"><%= @tweets.title %></h5>
+    <p class="card-text"><%= @tweets.text %></p>
+  </div>
+  <div class="card-footer text-muted">
+    <%= render partial: "likes/like", locals: {tweet: @tweets, like: @like} %>
+    <%= link_to 'コメント', new_tweet_comment_path(@tweets), class: "fas fa-reply text-info float-left ml-3" %>
+    <span class="text-info float-left ml-1">
+      <%= @tweets.comments_count %>
+    </span>
+    <%= social_share_button_tag(@tweets.title) %>
+  </div>
+</div>

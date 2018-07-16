@@ -1,0 +1,18 @@
+<!-- スレッド -->
+
+<%= render 'tweets/thread' %>
+
+<!-- リプライ -->
+
+<% @comments.each do |comment| %>
+  <%= render partial: 'tweets/comments', locals: {comment: comment} %>
+<% end %>
+
+<div class="card card-body mx-auto w-75 mb-5">
+  <%= link_to 'このスレッドにコメントする', new_tweet_comment_path(@tweets), class: "btn-outline-danger btn-lg btn-primary fas fa-reply text-center" %>
+</div>
+
+
+<div class="mx-auto w-75">
+  <%= paginate(@comments) %>
+</div>

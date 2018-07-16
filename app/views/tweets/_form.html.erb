@@ -1,0 +1,10 @@
+<%= form_for (@tweets) do |f| %>
+  <div class="form-signin mt-5">
+    <h1 class="h3 mb-3 font-weight-normal text-center">スレッドの投稿</h1>
+    <%= f.label :title, class: "sr-only" %>
+    <%= f.text_area :title, maxlength: "40", class: "form-control mb-2", style: "resize: none;", placeholder: "タイトル(40文字以内)" %>
+    <%= f.label :text, class: "sr-only" %>
+    <%= f.text_area :text, class: "form-control mb-2", style: "resize: none;", placeholder: "スレッドの内容" %>
+    <%= f.submit "投稿する", class: "btn btn-lg btn-danger btn-block" %>
+  </div>
+<% end %>

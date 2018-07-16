@@ -1,0 +1,20 @@
+<%= render 'mypage' %>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><%= @users.nickname %>さんの投稿一覧</a>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <% @tweets.each do |tweet| %>
+      <%= render partial: 'tweets', locals: {tweet: tweet} %>
+    <% end %>
+  </div>
+</div>
+
+<div class="mx-auto w-75">
+  <%= paginate(@tweets) %>
+</div>
+

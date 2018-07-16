@@ -1,0 +1,36 @@
+<div class="card text-center w-75 mt-5 mb-5 mx-auto">
+  <div class="card-header">
+    <div class="float-left">
+      <% if comment.user.image.nil? %>
+        <%= image_tag "assets/071-01.png", size: "45x45", class: "user-image-circle" %>
+      <% else %>
+        <%= image_tag comment.user.image, size: "45x45", class: "user-image-circle" %>
+      <% end %>
+      <%= link_to "#{comment.user.nickname}さんのコメント", user_path(comment.user.id) %>
+    </div>
+    <div class="float-right">
+      <div class="dropdown">
+        <a class="oi oi-ellipses dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <% if user_signed_in? && comment.user.id == current_user.id %>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><%= link_to '編集', "/tweets/#{@tweets.id}/comments/#{comment.id}/edit" %></li>
+              <li><%= link_to '削除', "/tweets/#{@tweets.id}/comments/#{comment.id}", method: :delete %></li>
+            </ul>
+          <% else %>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><%= link_to "#{comment.user.nickname}さんのマイページ", user_path(comment.user.id) %></li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><%= comment.comments %></p>
+  </div>
+  <div class="card-footer text-muted">
+    <%= link_to "#{comment.user.nickname}さんのマイページ", user_path(comment.user.id) %>
+  </div>
+</div>

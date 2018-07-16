@@ -1,0 +1,4 @@
+<%= form_for(current_user.active_relationships.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :followed_id, @users.id %></div>
+  <%= f.submit 'フォロー', class: "btn-outline-primary btn mt-3" %>
+<% end %>

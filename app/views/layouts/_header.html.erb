@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-light sticky-top">
+  <div class="container">
+    <%= link_to tweets_path do %>
+      <%= image_tag "15301066352625988.png", size: "250x60" %>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
+      <span class="navbar-toggler-icon bg-secondary"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <% if user_signed_in? %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "oi oi-account-logout btn-outline-danger btn-lg btn-primary" %>
+              <%= link_to 'マイページ', user_path(current_user.id), class: "oi oi-person btn-outline-danger btn-lg btn-primary" %>
+          <% else %>
+              <%= link_to 'ログイン', new_user_session_path, class: "oi oi-account-login btn-outline-danger btn-lg btn-primary" %>
+              <%= link_to '新規登録', new_user_registration_path, class: "oi oi-heart btn-outline-danger btn-lg btn-primary" %>
+          <% end %>
+        </li>
+      </ul>
+      <% if user_signed_in? %>
+        <%= link_to '投稿する', new_tweet_path, class: "btn-outline-danger btn-lg btn-primary oi oi-pencil text-center" %>
+      <% end %>
+    </div>
+  </div>
+</nav>

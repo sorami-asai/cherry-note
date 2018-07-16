@@ -1,0 +1,12 @@
+<%= form_for(@users) do |f| %>
+  <div class="form-signin" style="margin-top: 40px;">
+    <h1 class="h3 mb-3 font-weight-normal text-center">マイページ</h1>
+    <%= f.label :image, "プロフィール画像", class: "oi oi-camera-slr btn btn-outline-danger btn-block mb-2" %>
+    <%= f.file_field :image, class: "btn btn-outline-danger btn-block mb-2" %>
+    <%= f.label :ニックネーム, class: "sr-only" %>
+    <%= f.text_field :nickname, autofocus: true, autocomplete: "ニックネーム", class: "form-control mb-2", id: "inputPassword", placeholder: "ニックネームを入力" %>
+    <%= f.label :メールアドレス, class: "sr-only" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mb-2", id: "inputEmail", placeholder: "メールアドレスを入力" %>
+    <%= f.submit "更新", class: "btn btn-lg btn-danger btn-block" %>
+  </div>
+<% end %>

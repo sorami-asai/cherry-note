@@ -1,0 +1,48 @@
+<div class="card text-center w-75 mt-5 mb-5 mx-auto">
+  <div class="card-header">
+    <div class="float-left">
+      <% if tweet.user.image.nil? %>
+        <%= link_to user_path(tweet.user.id) do %>
+          <%= image_tag "assets/071-01.png", size: "45x45", class: "user-image-circle" %>
+        <% end %>
+      <% else %>
+        <%= link_to user_path(tweet.user.id) do %>
+          <%= image_tag tweet.user.image, size: "45x45", class: "user-image-circle" %>
+        <% end %>
+      <% end %>
+      <%= link_to "#{tweet.user.nickname}さんの投稿", user_path(tweet.user.id) %>
+    </div>
+    <div class="float-right">
+      <div class="dropdown">
+        <a class="oi oi-ellipses dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <% if user_signed_in? && tweet.user.id == current_user.id %>
+            <ul>
+              <li><%= link_to '編集', edit_tweet_path(tweet.id) %></li>
+              <li><%= link_to '削除', tweet_path(tweet.id), method: :delete %></li>
+            </ul>
+          <% else %>
+            <ul>
+              <li><%= link_to "#{tweet.user.nickname}さんのマイページ", user_path(tweet.user.id) %></li>
+              <li><%= link_to 'スレッドを見る', tweet_path(tweet.id) %></li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title" style="font-weight: bold;"><%= tweet.title %></h5>
+    <p class="card-text"><%= tweet.text %></p>
+    <%=  link_to 'スレッドを見る', tweet_path(tweet.id) %>
+  </div>
+  <div class="card-footer text-muted">
+    <%= render partial: "likes/like", locals: {tweet: tweet, like: @like} %>
+    <%= link_to 'コメント', new_tweet_comment_path(tweet.id), class: "fas fa-reply text-info float-left ml-3" %>
+    <span class="text-info float-left ml-1">
+      <%= tweet.comments_count %>
+    </span>
+    <%= social_share_button_tag(tweet.title) %>
+  </div>
+</div>
