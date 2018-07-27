@@ -4,11 +4,17 @@ class TweetsController < ApplicationController
 
   def index
     @tweets = Tweet.order("created_at DESC").page(params[:page]).per(10)
+    if user_signed_in?
+      @like_hash = Like.where(user_id: current_user.id).pluck(:id, :tweet_id).to_h
+    end
   end
 
   def show
     @comments = @tweets.comments.includes(:user)
     @comments = @comments.order("created_at DESC").page(params[:page]).per(10)
+    if user_signed_in?
+      @like_hash = Like.where(user_id: current_user.id).pluck(:id, :tweet_id).to_h
+    end
   end
 
   def new

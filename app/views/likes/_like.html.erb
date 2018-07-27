@@ -1,11 +1,11 @@
-<% if user_signed_in? %>
-  <% if tweet.like_user(current_user.id) %>
-    <%= link_to 'いいね', "tweets/#{tweet.id}/likes/#{like}", method: :delete, class: "fas fa-heart text-danger float-left", id: "like-buttons", remote: true %>
+け<% if user_signed_in? %>
+  <% if @like_hash.has_value?(tweet.id) %>
+    <%= link_to 'いいねを消す', tweet_like_path(tweet.id, @like_hash.key(tweet.id)), class:'fas fa-heart text-danger float-left', method: :delete, id: "like-button", remote: true %>
     <span class="text-danger float-left ml-1">
       <%= tweet.likes_count %>
     </span>
   <% else %>
-    <%= link_to 'いいね', tweet_likes_path(tweet.id), method: :post, class: "far fa-heart text-danger float-left", id: "like-buttons", remote: true %>
+    <%= link_to 'いいねする', tweet_likes_path(tweet_id: tweet.id), method: :post, class: 'far fa-heart text-danger float-left', id: "like-button", remote: true %>
     <span class="text-danger float-left ml-1">
       <%= tweet.likes_count %>
     </span>

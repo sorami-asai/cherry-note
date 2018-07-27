@@ -36,7 +36,9 @@
     <p class="card-text"><%= @tweets.text %></p>
   </div>
   <div class="card-footer text-muted">
-    <%= render partial: "likes/like", locals: {tweet: @tweets, like: @like} %>
+    <div id="like_<%= @tweets %>">
+      <%= render partial: "likes/like", locals: {tweet: @tweets} %>
+    </div>
     <%= link_to 'コメント', new_tweet_comment_path(@tweets), class: "fas fa-reply text-info float-left ml-3" %>
     <span class="text-info float-left ml-1">
       <%= @tweets.comments_count %>
