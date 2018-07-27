@@ -52,3 +52,4 @@ production:
   database: cherry_note_production
   username: cherry_note
   password: <%= ENV['CHERRY_NOTE_DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
